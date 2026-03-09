@@ -104,8 +104,38 @@ projects/dfe/Drumstr/      ← Obsidian Kanban task management (not in repo)
 | MONEYDEVKIT-SPEC.md | Lightning payments, admin split distribution |
 | MOBILE-APP-SPEC.md | Expo/React Native mobile app |
 | WEB-APP-SPEC.md | Next.js web app |
+| BITCOIN-BLOCK-TIMING-SPEC.md | Block-aligned session timing, Bitcoin time education |
 
 ## 5. Current Proposed Solution — High-Level Architecture
+
+### ⚡ Architectural Decision: Nostr-First Hybrid (2026-03-09)
+
+**Decision:** Drumstr uses a **Nostr-first hybrid architecture** — not pure Nostr, not Postgres-only.
+
+| Data Type | Where Stored | Why |
+|---|---|---|
+| User identity & profiles | Nostr relay | Decentralized, self-sovereign, censorship-resistant |
+| Event announcements | Nostr relay (Kind 39613) | Public, discoverable by any Nostr client |
+| Drum Calls | Nostr relay (Kind 8131) | Community-owned social signal, public energy display |
+| Facilitator roster | Nostr relay (Kind 30078) | Admin-managed, relay-verifiable |
+| Payment records | PostgreSQL | ACID required, webhook processing, financial audit trail |
+| Push notification tokens | PostgreSQL | Device-specific, private, server-managed |
+| Session state (active/completed) | PostgreSQL | Atomic state transitions, race condition safety |
+| Drum Call aggregation & thresholds | PostgreSQL | Server authority needed for spam prevention |
+| Facilitator availability windows | PostgreSQL | Complex queries, private scheduling data |
+| Block height at session start | PostgreSQL | Operational record for history/display |
+
+**Why not pure Nostr:**
+- MoneyDevKit payment webhooks require an HTTPS server — unavoidable
+- Firebase FCM push notifications require server-side triggering
+- Drum Call threshold enforcement requires server authority to prevent spam
+- Complex availability queries (who is free when) are not viable via relay filters alone
+- Atomic state transitions (confirm event + create room + notify + record payment) require a coordinator
+
+**Why not Postgres-only:**
+- The vision is explicitly Nostr-native and decentralized
+- Community-owned Drum Calls and event data must be readable by any Nostr client
+- Identity must be self-sovereign — not tied to a Drumstr account
 
 ### Technology Stack
 
@@ -114,11 +144,13 @@ projects/dfe/Drumstr/      ← Obsidian Kanban task management (not in repo)
 | Mobile App | Expo (React Native, TypeScript) | Cross-platform iOS/Android, TypeScript, large ecosystem |
 | Web App | Next.js (TypeScript, App Router) | SSR/SEO, native MoneyDevKit SDK, React ecosystem |
 | Backend API | Node.js + Express (TypeScript) | Unified language, fast, flexible |
-| Database | PostgreSQL (via Prisma ORM) | Structured data, mature, Docker-friendly |
+| Database | PostgreSQL (via Prisma ORM) | Operational/transactional data, mature, Docker-friendly |
+| Social Layer | Nostr relay (self-hosted) | Public events, Drum Calls, profiles — community-owned |
 | A/V | HiveTalk (self-hosted, Nostr-native) | Privacy-first, Nostr identity integration, open-source |
 | A/V Fallback | MiroTalk SFU (self-hosted) | Proven WebRTC SFU, well-documented, scales to 100+ |
 | Identity | Nostr keypairs | Decentralized, censorship-resistant, privacy-preserving |
 | Nostr Relay | nostr-rs-relay (self-hosted) | Lightweight, Rust-based, low resource usage |
+| Block Timing | mempool.space API | Bitcoin block height display, educational reference |
 | Payments | MoneyDevKit | Lightning, self-custodial, Next.js native, MCP-compatible |
 | Notifications | Firebase Cloud Messaging (FCM) | Free tier, broad platform coverage |
 | CDN | Cloudflare | Free tier, DDoS protection, DNS |
@@ -150,7 +182,7 @@ flowchart TD
     subgraph BackendVPS["Backend VPS — Infomaniak, Switzerland"]
         API["🔧 REST API\n(Node.js / Express / TypeScript)"]
         DB["🗄️ PostgreSQL\n(Prisma ORM)"]
-        RELAY["📡 Nostr Relay\n(nostr-rs-relay)"]
+        RELAY["📡 Nostr Relay\n(nostr-rs-relay)\nEvents, Drum Calls, Profiles"]
         WP["📝 Wordpress\n(FluentCRM + Blog)"]
     end
 
@@ -163,16 +195,23 @@ flowchart TD
         FCM["🔔 Firebase FCM\n(Push Notifications)"]
         CF["🛡️ Cloudflare\n(DNS / CDN / SSL)"]
         B2["🗂️ Backblaze B2\n(Media Storage)"]
+        MEM["⛏ mempool.space\n(Block Height API)"]
     end
 
     MOB -->|REST API| API
+    MOB -->|Nostr events read| RELAY
+    MOB -->|Drum Calls published| RELAY
     MOB -->|WebView| HT
     MOB -->|WebView checkout| MDK
     WEB -->|REST API| API
+    WEB -->|Nostr events read| RELAY
+    WEB -->|Drum Calls published| RELAY
     WEB -->|iframe / redirect| HT
     WEB -->|@moneydevkit/nextjs| MDK
+    WEB -->|block height| MEM
+    MOB -->|block height| MEM
     API --> DB
-    API --> RELAY
+    API -->|publish confirmations| RELAY
     API --> FCM
     API --> B2
     API --> HT
@@ -182,16 +221,20 @@ flowchart TD
     CF -->|proxy| WEB
 ```
 
+> **Nostr-first hybrid:** Public social data (events, Drum Calls, profiles) lives on the Nostr relay — readable by any Nostr client. Operational/transactional data (payments, push tokens, session state, thresholds) lives in Postgres. See §5 architecture decision table for full breakdown.
+
 ## 6. Next Steps
 
 1. Review and approve all sub-specs in this folder.
-2. Create GitHub repo `drumstr` (monorepo).
+2. Create GitHub repo `drumstr` (monorepo). ✅ Done (2026-03-09)
 3. Initialize monorepo: pnpm workspaces + Turborepo.
 4. Provision VPS servers (Infomaniak + Hetzner).
 5. Execute specs in this order (respecting dependencies):
    - INFRA-SPEC → BACKEND-API-SPEC → HIVETALK-AV-SPEC → NOSTR-IDENTITY-SPEC
    - EVENT-MGMT-SPEC → MONEYDEVKIT-SPEC (parallel, depends on API)
+   - BITCOIN-BLOCK-TIMING-SPEC (parallel, shared utilities first)
    - MOBILE-APP-SPEC + WEB-APP-SPEC (parallel, depends on API)
+6. Resolve HIVETALK-AV-SPEC §7 noise cancellation blocker before A/V implementation.
 
 ## 7. Current Unresolved Issues
 
@@ -207,3 +250,4 @@ flowchart TD
 | Date | Author | Description |
 |---|---|---|
 | 2026-03-07 | Moses / Copilot | Initial master spec created |
+| 2026-03-09 | Moses / Copilot | Added Nostr-first hybrid architecture decision; updated tech stack; updated Mermaid diagram with Drum Call flows and mempool.space; added BITCOIN-BLOCK-TIMING-SPEC to spec index |

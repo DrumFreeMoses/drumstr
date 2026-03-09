@@ -205,6 +205,134 @@ export const confirmEvent = async (requestId: string, facilitatorNpub: string) =
 - Participant roster (who has RSVP'd) not modeled yet — needed for room capacity management.
 - Timezone handling: store all times in UTC, display in user's local timezone on client.
 
+## 9. Drum Call Mechanic — Community-Initiated Session Activation
+
+> **Design principle:** This mechanic is the beating heart of Drumstr and *will evolve*. Build it modularly — the threshold logic, intensity model, and activation rules must be easy to change without touching the state machine.
+
+### Concept
+
+Instead of a single user *requesting* an event, the **community drums one into existence**. Users send "Drum Calls" — taps with an intensity signal (1–5) — expressing desire for a session. When accumulated community energy crosses a threshold, a facilitator is notified and can activate the session.
+
+This is Nostr-native: Drum Calls are published as Nostr events on the relay (public, decentralized, community-owned). Aggregation and threshold logic runs server-side (Postgres) to prevent spam and enable fast querying.
+
+### Drum Call Nostr Event (Kind 8131)
+
+```typescript
+// Drum Call — Kind 8131 (regular Nostr event, per Shakespeare NIP)
+{
+  kind: 8131,
+  content: "",
+  tags: [
+    ["e", "<event-or-slot-id>"],       // reference to the open slot/session being called
+    ["intensity", "3"],                 // 1–5 (community energy contribution)
+    ["p", "<facilitator-npub>"],        // optional: targeting a specific facilitator
+  ]
+}
+```
+
+### Drum Call Data Model (Postgres — aggregation layer)
+
+```prisma
+// Addition to schema.prisma
+model DrumCall {
+  id            String    @id @default(cuid())
+  callerNpub    String                          // Nostr pubkey of caller
+  slotId        String                          // references OpenSlot or EventRequest
+  intensity     Int       @default(1)           // 1–5
+  nostrEventId  String?   @unique               // Nostr event ID for dedup/reference
+  createdAt     DateTime  @default(now())
+
+  @@unique([callerNpub, slotId])               // one call per user per slot
+}
+
+model OpenSlot {
+  id              String      @id @default(cuid())
+  scheduledAt     DateTime                         // clock-aligned (xx:00, xx:10, etc.)
+  slotCount       Int         @default(1)          // 1 = 10 min, 6 = 60 min
+  status          SlotStatus  @default(OPEN)
+  facilitatorId   String?                          // null until claimed
+  totalEnergy     Int         @default(0)          // sum of all intensities (denormalized for speed)
+  uniqueCallers   Int         @default(0)          // count of distinct callers
+  activationThreshold Int     @default(5)          // configurable per slot
+  createdAt       DateTime    @default(now())
+  drumCalls       DrumCall[]
+}
+
+enum SlotStatus {
+  OPEN          // accepting Drum Calls
+  ACTIVATING    // threshold reached, awaiting facilitator claim
+  CONFIRMED     // facilitator claimed, room created
+  ACTIVE        // session in progress
+  COMPLETED
+  CANCELLED
+}
+```
+
+### Intensity Model (v1)
+
+| Intensity | Meaning | Sats (suggested Zap) |
+|---|---|---|
+| 1 | Mild interest — I'd join if it happens | 0 |
+| 2 | Interested — would make time for it | 21 |
+| 3 | Keen — really want this session | 100 |
+| 4 | Urgent — need this now | 210 |
+| 5 | Fire — I'm drumming right now, join me! | 1000 |
+
+> **Flexibility note:** Intensity levels, Zap amounts, and threshold values are configuration — not hardcoded. Store in a `config` table or env vars. These will be tuned based on real usage.
+
+### Threshold & Activation Flow
+
+```
+User taps drum icon (intensity 1–5)
+    │
+    ▼
+POST /drum-calls  (authenticated)
+    │
+    ├── Publish Nostr kind 8131 event to relay
+    ├── Upsert DrumCall in Postgres (dedup: one per user per slot)
+    ├── Recalculate OpenSlot.totalEnergy + uniqueCallers
+    │
+    └── IF totalEnergy >= activationThreshold AND status == OPEN:
+            Set slot status → ACTIVATING
+            Notify available facilitators via FCM:
+            "🥁 The community wants to drum! 5 callers, energy: 23 — claim this slot"
+                │
+                ▼
+        Facilitator claims slot:
+        PUT /slots/:id/claim
+            │
+            ├── Set status → CONFIRMED
+            ├── Create HiveTalk room
+            ├── Notify all callers: "Session confirmed! Join: av.drumstr.app/..."
+            └── Zap callers' contributions processed via MONEYDEVKIT-SPEC
+```
+
+### Anti-Spam Rules (server-enforced)
+
+- One Drum Call per user per slot (enforced by Postgres unique constraint)
+- Intensity can be updated (re-tap to increase), not decreased — keeps energy moving upward
+- Rate limit: max 3 Drum Calls per user per hour across all slots
+- Nostr event ID stored to prevent replay/duplicate webhook processing
+
+### API Endpoints Added
+
+| Method | Path | Auth | Description |
+|---|---|---|---|
+| GET | /slots | — | List open slots with Drum Call stats |
+| POST | /slots | JWT (admin/auto) | Create an open slot (manual or scheduled) |
+| POST | /drum-calls | JWT | Submit a Drum Call (intensity 1–5) |
+| GET | /slots/:id/drum-calls | — | Get all Drum Calls for a slot |
+| PUT | /slots/:id/claim | JWT (facilitator) | Facilitator claims an activating slot |
+
+### Evolution Path
+
+This mechanic is intentionally v1-simple. Planned iterations (not in scope now, note for future):
+- Community-proposed slot times (not just fixed clock slots)
+- "Drum Call expiry" — calls fade if no session happens within N blocks
+- Facilitator bidding — multiple facilitators can offer to host, community votes
+- Zap-weighted threshold — heavy Zappers have more activation power
+- Global energy heatmap — see where on Earth the drumming energy is highest
+
 ## 8. Change Log
 
 | Date | Author | Description |
