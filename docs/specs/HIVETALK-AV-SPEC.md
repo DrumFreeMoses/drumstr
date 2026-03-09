@@ -214,6 +214,16 @@ Response: { "meeting": "https://av.drumstr.app/join?room=drumstr-event-{eventId}
 - **MiroTalk API auth:** Confirm `Authorization: Secret` header format matches current MiroTalk SFU API implementation.
 - **100-user capacity:** CX31 with 4 workers is estimated — must validate with load testing before claiming 100-user support.
 - **Mobile WebRTC:** Some mobile browsers restrict WebRTC in WebView. May need to open HiveTalk/MiroTalk URL in the device's native browser instead of in-app WebView.
+- **⚠️ FUNDAMENTAL: Noise cancellation toggle for drumming (2026-03-09)**
+  Drumstr requires **two-way audio** (all participants heard) with the ability to **toggle noise cancellation off** — because WebRTC noise cancellation aggressively suppresses drum sounds, treating them as background noise. Zoom Pro solved this with a "Original Sound" toggle that disables noise cancellation per-user, preserving drum timbre and dynamics. **HiveTalk and MiroTalk SFU do not currently expose this toggle in their UI.** This is a core UX requirement — without it, participant drum audio will be degraded or silenced by the browser/SFU audio pipeline.
+  
+  **Known approaches to explore:**
+  1. **Browser-level override**: Set `noiseSuppression: false`, `echoCancellation: false`, `autoGainControl: false` in the `getUserMedia` constraints — requires forking/patching HiveTalk or MiroTalk SFU client code.
+  2. **Custom WebRTC client**: Build a minimal custom WebRTC client (not HiveTalk/MiroTalk UI) that gives Drumstr full control over audio processing constraints, embedding or integrating with the SFU's signaling layer.
+  3. **Browser extension workaround**: Instruct desktop users to disable noise cancellation via browser flags — not viable for mobile.
+  4. **HiveTalk fork**: Fork and patch HiveTalk to expose an "Original Sound / Drum Mode" toggle — most aligned with the vision; evaluate effort.
+  
+  **Resolution required before v1 A/V implementation.** This issue may determine whether HiveTalk/MiroTalk is viable or whether a custom WebRTC client is needed.
 
 ## 8. Change Log
 

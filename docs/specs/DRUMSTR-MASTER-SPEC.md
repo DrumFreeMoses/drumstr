@@ -200,6 +200,7 @@ flowchart TD
 - HiveTalk self-hosting docs were inaccessible; using MiroTalk SFU docs as infrastructure reference.
 - Confirm Infomaniak VPS specs and current pricing before provisioning.
 - Payment split distribution (DFE % vs facilitator %) needs admin UI spec — defer to v1.1.
+- **⚠️ FUNDAMENTAL: WebRTC noise cancellation suppresses drum audio.** HiveTalk and MiroTalk SFU do not expose a noise cancellation toggle. A "Drum Mode" (noise suppression off) toggle is required for participants' drum sounds to be heard. See HIVETALK-AV-SPEC §7 for resolution options. This may require a custom WebRTC client or forking HiveTalk. **Must resolve before any A/V implementation begins.**
 
 ## 8. Change Log
 
