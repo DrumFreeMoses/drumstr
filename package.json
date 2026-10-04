@@ -1,0 +1,28 @@
+{
+  "name": "drumstr",
+  "version": "1.0.0",
+  "description": "**10 minutes. Every day. After work. A global community drumming on Bitcoin. Nostr-native. Open source.**",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrumFreeMoses/drumstr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DrumFreeMoses/drumstr/issues"
+  },
+  "homepage": "https://github.com/DrumFreeMoses/drumstr#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "serve": "^14.2.6"
+  }
+}
