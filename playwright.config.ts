@@ -7,7 +7,7 @@ export default defineConfig({
   workers: 4,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:4173',
+    baseURL: 'https://drumstr.drumfreeexperience.org',
     headless: true,
   },
   projects: [
@@ -16,10 +16,4 @@ export default defineConfig({
       use: { browserName: 'chromium' },
     },
   ],
-  webServer: {
-    command: 'npx serve landing-page -l 4173',
-    url: 'http://localhost:4173',
-    reuseExistingServer: true,
-    timeout: 15000,
-  },
 });

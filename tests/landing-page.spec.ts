@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 
-const BASE_URL = 'http://localhost:4173';
+const BASE_URL = 'https://drumstr.drumfreeexperience.org';
 
 test.describe('Drumstr Landing Page', () => {
 
