@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8d48b"/>
+      <stop offset="50%" stop-color="#d2b356"/>
+      <stop offset="100%" stop-color="#b8963e"/>
+    </linearGradient>
+    <linearGradient id="drumBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4a3728"/>
+      <stop offset="100%" stop-color="#2c1810"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#goldGrad)"/>
+  <circle cx="100" cy="100" r="88" fill="#2c1810"/>
+  
+  <!-- Drum body (side view suggestion) -->
+  <ellipse cx="100" cy="115" rx="55" ry="25" fill="url(#drumBody)" stroke="#d2b356" stroke-width="3"/>
+  <ellipse cx="100" cy="100" rx="55" ry="25" fill="#4a3728" stroke="#d2b356" stroke-width="3"/>
+  
+  <!-- Drum head -->
+  <ellipse cx="100" cy="100" rx="55" ry="25" fill="#e8d48b" opacity="0.9"/>
+  
+  <!-- Drum center spot -->
+  <circle cx="100" cy="100" r="12" fill="#d2b356"/>
+  
+  <!-- Sound waves - upper right -->
+  <g stroke="#d2b356" stroke-width="4" stroke-linecap="round" fill="none">
+    <path d="M 160 70 Q 175 55 180 40" opacity="0.9"/>
+    <path d="M 165 85 Q 185 75 195 60" opacity="0.7"/>
+    <path d="M 162 100 Q 190 95 210 85" opacity="0.5"/>
+  </g>
+  
+  <!-- Sound waves - upper left (balanced) -->
+  <g stroke="#d2b356" stroke-width="4" stroke-linecap="round" fill="none">
+    <path d="M 40 70 Q 25 55 20 40" opacity="0.9"/>
+    <path d="M 35 85 Q 15 75 5 60" opacity="0.7"/>
+    <path d="M 38 100 Q 10 95 -10 85" opacity="0.5"/>
+  </g>
+</svg>
