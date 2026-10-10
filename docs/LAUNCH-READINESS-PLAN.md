@@ -1709,17 +1709,14 @@ Effort: ~1 hour
 14 people from 9 countries just finished drumming together. 
 Vibes: grounding, energetic, joyful. 🪘
 
-Want to support this work? Optional sliding-scale tip:
-
-[QR CODE IMAGE]
-OR
-[MONEYDEVKIT PAYMENT LINK]
+Want to support this work? Optional sliding-scale tip, any amount:
+⚡ serialrush944@wos.com (Lightning Address — paste into any wallet)
 
 80% goes to facilitators, 20% goes to DFE (our team).
-No tip? No problem! See you tomorrow at Noon MT.
+No tip? No problem! See you tomorrow at 5:00 PM MT.
 
-Next Block: Tomorrow, 12:00 PM Mountain Time
-Join: https://dfe.org/drumstr
+Next Block: Tomorrow, 5:00 PM Mountain Time
+Join: https://drumfreeexperience.org/drumstr
 
 #drumstr #nostr #bitcoin ⚡🪘
 ```
@@ -1797,13 +1794,13 @@ Join: https://dfe.org/drumstr
 **Template 1: Pre-Block Announcement (30 min before)**
 
 ```
-🪘 Drumstr Block in 30 min — [DATE] at 12:00 PM MT
+🪘 Drumstr Block in 30 min — [DATE] at 5:00 PM MT
 
 Join us for 10 minutes of collective drumming.
 Everyone welcome. No experience needed. Free.
 
 Room: [MIROTALK_URL]
-Info: https://dfe.org/drumstr
+Info: https://drumfreeexperience.org/drumstr
 
 #drumstr #nostr #drums #bitcoin ⚡
 ```
@@ -1821,9 +1818,9 @@ Vibes: [descriptive words - grounding, joyful, energetic, etc.]
 💰 Supported this with a tip? More power to you. No tip? Still loved.
 📈 This is week [#], block [#].
 
-Optional tip: [PAYMENT LINK]
-Next block: Tomorrow, 12:00 PM MT
-https://dfe.org/drumstr
+Optional tip, any amount: ⚡ serialrush944@wos.com (Lightning Address)
+Next block: Tomorrow, 5:00 PM MT
+https://drumfreeexperience.org/drumstr
 
 #drumstr #nostr 🪘⚡
 ```
@@ -1833,7 +1830,7 @@ https://dfe.org/drumstr
 ```
 📊 Drumstr Weekly — Week [#] Summary
 
-🪘 Blocks: 7
+🪘 Blocks: 5 (Mon-Fri)
 👥 Total attendance: [X] people
 🌍 Countries: [COUNTRIES]
 ⚡ Revenue: [Y] sats
@@ -1845,7 +1842,7 @@ https://dfe.org/drumstr
 📈 Growth: [% increase from last week]
 
 🙏 Thanks to everyone drumming with us.
-🤝 Help us build: https://github.com/drumstr/drumstr
+🤝 Help us build: https://github.com/DrumFreeMoses/drumstr
 
 Next week: [brief teaser]
 
