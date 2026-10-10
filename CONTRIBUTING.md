@@ -58,4 +58,4 @@ Be respectful. We're building together.
 
 ---
 
-Thanks for contributing! 🥁⚡
+Thanks for contributing! 🪘⚡

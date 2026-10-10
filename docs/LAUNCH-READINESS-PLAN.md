@@ -316,7 +316,7 @@ Use free Google Fonts:
   <!-- LIVE SIGNUP -->
   <section class="signup" id="signup">
     <div class="container">
-      <h3>🥁 Next Drum Block</h3>
+      <h3>🪘 Next Drum Block</h3>
       <div class="block-info">
         <div class="block-detail">
           <p class="label">When:</p>
@@ -1319,7 +1319,7 @@ https://demo.mirotalk.com/join/drumstr-block-2026-04-02
 2. Repo name: `drumstr`
 3. Description: `10 minutes. Every day. After work. A global community drumming on Bitcoin. Nostr-native. Open source.`
 4. Public visibility
-5. License: MIT
+5. License: CC0 1.0 Universal
 6. Create repo
 
 ---
@@ -1362,7 +1362,7 @@ drumstr/
 
 **10 minutes. Every day. After work. A global community drumming on Bitcoin. Nostr-native. Open source.**
 
-## 🥁 Join a Drum Block
+## 🪘 Join a Drum Block
 
 **Live:** https://dfe.org/drumstr
 
@@ -1421,7 +1421,7 @@ Drumstr is a **community-owned platform** for real-time, on-demand facilitated d
 
 ### Core Values
 - **Community-driven** — not a VC-funded startup
-- **Open source** — MIT license, fork and build your own
+- **Open source** — CC0 1.0 Universal (public domain), fork and build your own
 - **Bitcoin-native** — Lightning Network for payments, self-custodial
 - **Nostr-native** — decentralized identity, no surveillance
 - **Transparent** — 80/20 split (facilitator/platform), public roadmap
@@ -1467,11 +1467,11 @@ Drumstr is a **community-owned platform** for real-time, on-demand facilitated d
 
 ## 📜 License
 
-MIT — build what you want, credit appreciated but not required.
+CC0 1.0 Universal — public domain, zero restrictions, zero attribution required.
 
 ---
 
-**Come drum with us. ⚡🥁**
+**Come drum with us. ⚡🪘**
 
 Follow us on [Nostr](https://nostr.com) | Star us on [GitHub](https://github.com/drumstr/drumstr) | Join us [live](https://dfe.org/drumstr)
 ```
@@ -1541,7 +1541,7 @@ Be respectful. We're building together.
 
 ---
 
-Thanks for contributing! 🥁⚡
+Thanks for contributing! 🪘⚡
 ```
 
 ---
@@ -1659,7 +1659,7 @@ Effort: ~1 hour
 ---
 
 **GitHub Checklist:**
-- [ ] Repo created (public, MIT license)
+- [ ] Repo created (public, CC0 1.0 Universal license)
 - [ ] README.md customized + pushed
 - [ ] CONTRIBUTING.md added
 - [ ] docs/ folder created + LAUNCH-READINESS-PLAN.md added
@@ -1707,7 +1707,7 @@ Effort: ~1 hour
 ✅ Drumstr Block #1 complete!
 
 14 people from 9 countries just finished drumming together. 
-Vibes: grounding, energetic, joyful. 🥁
+Vibes: grounding, energetic, joyful. 🪘
 
 Want to support this work? Optional sliding-scale tip:
 
@@ -1721,7 +1721,7 @@ No tip? No problem! See you tomorrow at Noon MT.
 Next Block: Tomorrow, 12:00 PM Mountain Time
 Join: https://dfe.org/drumstr
 
-#drumstr #nostr #bitcoin ⚡🥁
+#drumstr #nostr #bitcoin ⚡🪘
 ```
 
 ---
@@ -1797,7 +1797,7 @@ Join: https://dfe.org/drumstr
 **Template 1: Pre-Block Announcement (30 min before)**
 
 ```
-🥁 Drumstr Block in 30 min — [DATE] at 12:00 PM MT
+🪘 Drumstr Block in 30 min — [DATE] at 12:00 PM MT
 
 Join us for 10 minutes of collective drumming.
 Everyone welcome. No experience needed. Free.
@@ -1825,7 +1825,7 @@ Optional tip: [PAYMENT LINK]
 Next block: Tomorrow, 12:00 PM MT
 https://dfe.org/drumstr
 
-#drumstr #nostr 🥁⚡
+#drumstr #nostr 🪘⚡
 ```
 
 **Template 3: Weekly Stats (Sunday or Monday)**
@@ -1833,7 +1833,7 @@ https://dfe.org/drumstr
 ```
 📊 Drumstr Weekly — Week [#] Summary
 
-🥁 Blocks: 7
+🪘 Blocks: 7
 👥 Total attendance: [X] people
 🌍 Countries: [COUNTRIES]
 ⚡ Revenue: [Y] sats
@@ -1952,7 +1952,7 @@ Next week: [brief teaser]
 - [ ] Test MiroTalk room URL one final time
 - [ ] Confirm landing page is live + room link showing
 - [ ] Post Nostr pre-announcement (30 min before)
-- [ ] Deep breath. You're about to facilitate your first Drum Block. 🥁
+- [ ] Deep breath. You're about to facilitate your first Drum Block. 🪘
 
 ---
 

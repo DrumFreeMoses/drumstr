@@ -128,7 +128,7 @@ export const confirmEvent = async (requestId: string, facilitatorNpub: string) =
   
   // Notify requester
   await notificationsService.send(request.requesterId, {
-    title: 'Event Confirmed! 🥁',
+    title: 'Event Confirmed! 🪘',
     body: `Your drum session is confirmed for ${event.scheduledAt.toLocaleString()}`,
     data: { eventId: event.id, roomUrl }
   })
@@ -295,7 +295,7 @@ POST /drum-calls  (authenticated)
     └── IF totalEnergy >= activationThreshold AND status == OPEN:
             Set slot status → ACTIVATING
             Notify available facilitators via FCM:
-            "🥁 The community wants to drum! 5 callers, energy: 23 — claim this slot"
+            "🪘 The community wants to drum! 5 callers, energy: 23 — claim this slot"
                 │
                 ▼
         Facilitator claims slot:

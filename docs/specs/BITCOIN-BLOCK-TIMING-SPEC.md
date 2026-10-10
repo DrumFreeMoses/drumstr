@@ -139,7 +139,7 @@ export const SESSION_DURATIONS = {
 
 ```
 ┌─────────────────────────────────────────────┐
-│  🥁 DRUMSTR                         Block Time │
+│  🪘 DRUMSTR                         Block Time │
 │                                              │
 │  Mon Mar 09, 2026  7:43 PM (MST)            │
 │  ⛏  Block #889,412                          │

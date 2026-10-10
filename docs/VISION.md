@@ -17,7 +17,7 @@ Drumstr is a **community-owned platform** for real-time, on-demand facilitated d
 - **Free to join** — optional sliding-scale Lightning payment after to support facilitators
 - **Bitcoin-native** — payments via Lightning Network (instant, low-cost, self-custodial)
 - **Nostr-native** — decentralized identity, no passwords, no surveillance
-- **Open source** — MIT license, fork and build your own version
+- **Open source** — CC0 1.0 Universal (public domain), fork and build your own version
 
 ### How It Works
 1. **Join a Drum Block** — Click a link at the scheduled time
@@ -34,7 +34,7 @@ Drumstr is a **community-owned platform** for real-time, on-demand facilitated d
 - Public roadmap, open governance
 
 ### Open Source
-- MIT license
+- CC0 1.0 Universal (public domain)
 - Fork and build your own version
 - No vendor lock-in
 - Community owns the code

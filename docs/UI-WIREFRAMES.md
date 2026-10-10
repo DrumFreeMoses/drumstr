@@ -8,7 +8,7 @@ Text-based wireframes for key screens. Mobile-first (375px). All times shown in 
 
 ```
 ┌─────────────────────────────┐
-│ 🥁 DRUMSTR          [npub▼] │
+│ 🪘 DRUMSTR          [npub▼] │
 ├─────────────────────────────┤
 │  Mon Mar 09  7:43 PM MST    │
 │  ⛏ ~Block 889,412           │
@@ -26,18 +26,18 @@ Text-based wireframes for key screens. Mobile-first (375px). All times shown in 
 │ ┌───────────────────────────┐│
 │ │ ⏰ 8:00 PM  •  1 block    ││
 │ │ Earth Rhythm — Requested  ││
-│ │ 🥁 5 callers  ⚡ 27 energy ││
+│ │ 🪘 5 callers  ⚡ 27 energy ││
 │ │ [DRUM CALL]  [Details]    ││
 │ └───────────────────────────┘│
 │ ┌───────────────────────────┐│
 │ │ ⏰ 9:00 PM  •  6 blocks   ││
 │ │ Full Transformation       ││
-│ │ 🥁 2 callers  ⚡ 8 energy  ││
+│ │ 🪘 2 callers  ⚡ 8 energy  ││
 │ │ [DRUM CALL]  [Details]    ││
 │ └───────────────────────────┘│
 ├─────────────────────────────┤
 │  [🏠 Home] [🔍 Explore]      │
-│  [🥁 Call] [👤 Profile]      │
+│  [🪘 Call] [👤 Profile]      │
 └─────────────────────────────┘
 ```
 
@@ -47,7 +47,7 @@ Text-based wireframes for key screens. Mobile-first (375px). All times shown in 
 
 ```
 ┌─────────────────────────────┐
-│        🥁 DRUM CALL         │
+│        🪘 DRUM CALL         │
 │    Earth Rhythm · 8:00 PM   │
 ├─────────────────────────────┤
 │  How urgently do you want   │
@@ -65,7 +65,7 @@ Text-based wireframes for key screens. Mobile-first (375px). All times shown in 
 │  ████████░░░░░░░  27/50     │
 │  5 unique callers           │
 │                             │
-│  [🥁 SEND DRUM CALL]        │
+│  [🪘 SEND DRUM CALL]        │
 │  [Cancel]                   │
 │                             │
 │  ─────────────────────────  │
@@ -79,7 +79,7 @@ Text-based wireframes for key screens. Mobile-first (375px). All times shown in 
 
 ```
 ┌─────────────────────────────┐
-│ 🥁 Fire Rhythm · Block 1/1  │
+│ 🪘 Fire Rhythm · Block 1/1  │
 │ ⛏ ~889,412  •  8:00→8:10 PM│
 ├─────────────────────────────┤
 │                             │
@@ -94,7 +94,7 @@ Text-based wireframes for key screens. Mobile-first (375px). All times shown in 
 │   └──────────┘ └──────────┘ │
 │                             │
 ├─────────────────────────────┤
-│ 🔇 Mute  🥁 Drum Mode OFF   │
+│ 🔇 Mute  🪘 Drum Mode OFF   │
 │           [Toggle →]        │
 │ [⚡ Zap Moses]  [✕ Leave]   │
 └─────────────────────────────┘
@@ -160,7 +160,7 @@ Note: "Drum Mode" toggle = noise cancellation off. See HIVETALK-AV-SPEC §7.
 ```
 ┌─────────────────────────────┐
 │                             │
-│         🥁 DRUMSTR          │
+│         🪘 DRUMSTR          │
 │                             │
 │   Virtual Group Drumming    │
 │   on Bitcoin & Nostr        │

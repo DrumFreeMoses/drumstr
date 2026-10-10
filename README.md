@@ -2,7 +2,7 @@
 
 **10 minutes. Every day. After work. A global community drumming on Bitcoin. Nostr-native. Open source.**
 
-## 🥁 Join a Drum Block
+## 🪘 Join a Drum Block
 
 **Live:** https://dfe.org/drumstr
 
@@ -12,7 +12,7 @@ Pick a time above, click "Join Room", and drum with us!
 - **Optional tip** — support facilitators via Lightning (sliding scale: 0 sats → ∞)
 - **No signup** — join anonymously via Nostr or just click the link
 - **10 minutes** — intentionally short for daily engagement
-- **Every day** — at Noon Mountain Time (11 AM PST / 2 PM EST)
+- **Every day** — at 5:00 PM Mountain Time (4 PM PST / 7 PM EST), Mon-Fri
 
 ---
 
@@ -61,13 +61,13 @@ Drumstr is a **community-owned platform** for real-time, on-demand facilitated d
 
 ### Core Values
 - **Community-driven** — not a VC-funded startup
-- **Open source** — MIT license, fork and build your own
+- **Open source** — CC0 1.0 Universal (public domain) — fork and build your own, no permission needed
 - **Bitcoin-native** — Lightning Network for payments, self-custodial
 - **Nostr-native** — decentralized identity, no surveillance
 - **Transparent** — 80/20 split (facilitator/platform), public roadmap
 
 ### How It Works
-1. **Join a Block** — Click room link at Noon MT
+1. **Join a Block** — Click room link at 5:00 PM MT, Mon-Fri
 2. **Drum Together** — 10 minutes of collective drumming
 3. **Optional Tip** — Support facilitators via Lightning (sliding scale)
 4. **Come Back** — Do it again tomorrow
@@ -107,10 +107,10 @@ Drumstr is a **community-owned platform** for real-time, on-demand facilitated d
 
 ## 📜 License
 
-MIT — build what you want, credit appreciated but not required.
+CC0 1.0 Universal — public domain. Copy, modify, distribute, even commercially, with zero restriction and zero requirement to credit.
 
 ---
 
-**Come drum with us. ⚡🥁**
+**Come drum with us. ⚡🪘**
 
 Follow us on [Nostr](https://nostr.com) | Star us on [GitHub](https://github.com/drumstr/drumstr) | Join us [live](https://dfe.org/drumstr)
