@@ -4,9 +4,18 @@
 
 // Weekly Block Schedule — 5:00 PM Mountain Time, Monday-Friday
 // (Respects day-job hours 7:30 AM-4:30 PM MT. Weekend/extra 10-min sessions coming later.)
-// POC platform: public Jitsi with noise-suppression/echo/gain disabled so raw
-// drum audio passes through. HiveTalk/MiroTalk SFU self-host lands with the A/V VPS.
-const JITSI_AUDIO = '#config.disableNS=true&config.disableAEC=true&config.disableAGC=true&config.enableNoisyMicDetection=false';
+// POC platform: public Jitsi — drum-audio flags (raw audio through) +
+// broadcast toolbar whitelist (mic/camera/chat/hangup only). HiveTalk/MiroTalk
+// SFU self-host lands with the A/V VPS.
+const JITSI_AUDIO = '#config.disableNS=true'
+  + '&config.disableAEC=true'
+  + '&config.disableAGC=true'
+  + '&config.enableNoisyMicDetection=false'
+  + '&config.disableDeepLinking=true'
+  + '&config.toolbarButtons=' + encodeURIComponent(JSON.stringify(['microphone', 'camera', 'chat', 'hangup']))
+  + '&interfaceConfig.SHOW_JITSI_WATERMARK=false'
+  + '&interfaceConfig.SHOW_WATERMARK_FOR_GUESTS=false'
+  + '&interfaceConfig.DISABLE_JOIN_LEAVE_NOTIFICATIONS=true';
 const blockSchedule = [
   { day: "Monday",    date: "October 12", time: "5:00 PM MT", roomUrl: "https://meet.jit.si/drumstr-block-2026-10-12" + JITSI_AUDIO },
   { day: "Tuesday",   date: "October 13", time: "5:00 PM MT", roomUrl: "https://meet.jit.si/drumstr-block-2026-10-13" + JITSI_AUDIO },
