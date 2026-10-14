@@ -73,6 +73,19 @@ Repository initialized at `~/repos/drumstr`. No A/V server deployed yet. MiroTal
 
 ### Decision for v1: **MiroTalk SFU** (proceed with documented fallback; integrate HiveTalk when docs available)
 
+### HiveTalk Self-Hosting Research — RESOLVED (2026-10-14)
+
+The §7 research gap is closed. Findings:
+
+- **honey (HiveTalk 2.0)** — the current product at honey.hivetalk.org (v0.7, Sep 2026: polls, recording, subscriptions). **Closed source** — `HiveTalk/honey` repo is release-notes only. **Cannot be self-hosted.** Join URL scheme: `https://honey.hivetalk.org/join/{room}` (verified 200).
+- **Vanilla (HiveTalk 1.0)** — `HiveTalk/hivetalksfu`, AGPL, public. It is a **fork of MiroTalk SFU** + Nostr/Lightning UI. README states **"DEPRECATED — NO LONGER MAINTAINED"**; vanilla.hivetalk.org is dead. Self-hostable but unmaintained.
+- **MiroTalk SFU** — the maintained upstream that Vanilla forked from.
+
+**Decision (2026-10-14, user-approved):**
+1. **Now:** hosted honey.hivetalk.org for live sessions (Nostr-native, iPad-Safari-safe, zero infra). Landing page + `session-room.service.ts` `hivetalk` platform point at honey.
+2. **VPS:** self-host **MiroTalk SFU** on `av.drumfreeexperience.org` (maintained; same lineage as Vanilla). Migrate off honey when the VPS is up. Vanilla is not chosen — deprecated fork with no maintenance.
+
+
 ### Capacity Planning (100 A/V Users)
 | Parameter | Value |
 |---|---|
@@ -210,7 +223,7 @@ Response: { "meeting": "https://av.drumstr.app/join?room=drumstr-event-{eventId}
 
 ## 7. Current Unresolved Issues
 
-- **HiveTalk self-hosting:** Documentation was unavailable during spec creation. Must research before committing to HiveTalk over MiroTalk SFU.
+- **HiveTalk self-hosting:** ~~Documentation was unavailable during spec creation. Must research before committing to HiveTalk over MiroTalk SFU.~~ **RESOLVED 2026-10-14** — see §5 "HiveTalk Self-Hosting Research". honey is hosted-only/closed; Vanilla is a deprecated MiroTalk fork; MiroTalk SFU confirmed as the self-host choice.
 - **MiroTalk API auth:** Confirm `Authorization: Secret` header format matches current MiroTalk SFU API implementation.
 - **100-user capacity:** CX31 with 4 workers is estimated — must validate with load testing before claiming 100-user support.
 - **Mobile WebRTC:** Some mobile browsers restrict WebRTC in WebView. May need to open HiveTalk/MiroTalk URL in the device's native browser instead of in-app WebView.
@@ -231,3 +244,4 @@ Response: { "meeting": "https://av.drumstr.app/join?room=drumstr-event-{eventId}
 |---|---|---|
 | 2026-03-07 | Moses / Copilot | Initial spec created; MiroTalk SFU chosen as v1 implementation |
 | 2026-10-14 | HeruQ | Domain correction: av.drumstr.app → av.drumfreeexperience.org (drumstr.app is future). POC interim: public Jitsi with disableNS/disableAEC/disableAGC on landing page until VPS lands. |
+| 2026-10-14 | HeruQ | HiveTalk research resolved (§5): honey=hosted-only/closed, Vanilla=deprecated MiroTalk fork. Decision: hosted honey now, self-host MiroTalk SFU on VPS later. Landing page + session-room.service.ts switched meet.jit.si → honey.hivetalk.org. |

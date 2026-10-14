@@ -56,7 +56,7 @@ flowchart TD
 ### Phase 2: A/V Server
 | # | Task | Spec | Status |
 |---|---|---|---|
-| 2.1 | Research HiveTalk self-hosting docs | HIVETALK-AV-SPEC | ⬜ |
+| 2.1 | Research HiveTalk self-hosting docs | HIVETALK-AV-SPEC | ✅ |
 | 2.2 | Install MiroTalk SFU on Hetzner VPS | HIVETALK-AV-SPEC | ⬜ |
 | 2.3 | Configure Nginx + SSL (av.drumstr.app) | HIVETALK-AV-SPEC | ⬜ |
 | 2.4 | Configure port range for 100 users | HIVETALK-AV-SPEC | ⬜ |

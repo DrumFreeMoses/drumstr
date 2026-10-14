@@ -47,7 +47,7 @@ test.describe('Drumstr Landing Page', () => {
     await page.goto(BASE_URL);
     await expect(page.locator('#next-block-time')).toContainText('Mountain Time');
     await expect(page.locator('#room-link')).toBeVisible();
-    await expect(page.locator('#room-link')).toHaveAttribute('href', /jit\.si/);
+    await expect(page.locator('#room-link')).toHaveAttribute('href', /honey\.hivetalk\.org/);
   });
 
   test('upcoming blocks list renders five weekdays', async ({ page }) => {

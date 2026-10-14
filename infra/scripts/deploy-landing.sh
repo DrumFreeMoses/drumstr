@@ -15,11 +15,15 @@ echo "==> Remote sanity check"
 
 echo "==> Sync landing-page/ → ~/drumstr.drumfreeexperience.org/ (subdomain, primary)"
 rsync -avz --delete -e "ssh -o BatchMode=yes -o IdentitiesOnly=yes -i $KEY" \
-  --exclude='.DS_Store' landing-page/ "$HOST:~/drumstr.drumfreeexperience.org/"
+  --exclude='.DS_Store' \
+  --exclude='.htaccess' --exclude='php.ini' --exclude='cgi-bin/' --exclude='.well-known/' \
+  landing-page/ "$HOST:~/drumstr.drumfreeexperience.org/"
 
 echo "==> Sync landing-page/ → ~/public_html/drumstr/ (path URL)"
 rsync -avz --delete -e "ssh -o BatchMode=yes -o IdentitiesOnly=yes -i $KEY" \
-  --exclude='.DS_Store' landing-page/ "$HOST:~/public_html/drumstr/"
+  --exclude='.DS_Store' \
+  --exclude='.htaccess' --exclude='php.ini' --exclude='cgi-bin/' --exclude='.well-known/' \
+  landing-page/ "$HOST:~/public_html/drumstr/"
 
 echo "==> Verify live"
 curl -sf -m 10 https://drumstr.drumfreeexperience.org >/dev/null \
