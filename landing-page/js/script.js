@@ -6,7 +6,8 @@
 // (Respects day-job hours 7:30 AM-4:30 PM MT. Weekend/extra 10-min sessions coming later.)
 // Platform: hosted HiveTalk honey (honey.hivetalk.org) — Nostr-native, iPad-safe.
 // Self-hosted MiroTalk SFU lands with the A/V VPS.
-const honeyRoom = (date) => `https://honey.hivetalk.org/join/drumstr-block-${date}`;
+// honey join scheme is /meet/{code} (verified: /join/ just bounces to dashboard)
+const honeyRoom = (date) => `https://honey.hivetalk.org/meet/drumstr-block-${date}`;
 const blockSchedule = [
   { day: "Monday",    date: "October 12", time: "5:00 PM MT", roomUrl: honeyRoom("2026-10-12") },
   { day: "Tuesday",   date: "October 13", time: "5:00 PM MT", roomUrl: honeyRoom("2026-10-13") },
