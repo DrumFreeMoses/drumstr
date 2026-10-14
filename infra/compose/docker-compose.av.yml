@@ -1,0 +1,18 @@
+# MiroTalk SFU — A/V VPS (HIVETALK-AV-SPEC v1 decision: MiroTalk SFU)
+# WebRTC: UDP+TCP 40000-40200 (2 ports × 100 users), app on 3010.
+# SFU_ANNOUNCED_IP comes from .env (public IP of this VPS — required for ICE).
+services:
+  mirotalksfu:
+    image: miroslavpejic85/mirotalksfu:latest
+    container_name: drumstr-mirotalksfu
+    restart: unless-stopped
+    ports:
+      - "3010:3010"
+      - "${SFU_MIN_PORT:-40000}-${SFU_MAX_PORT:-40200}:${SFU_MIN_PORT:-40000}-${SFU_MAX_PORT:-40200}/udp"
+      - "${SFU_MIN_PORT:-40000}-${SFU_MAX_PORT:-40200}:${SFU_MIN_PORT:-40000}-${SFU_MAX_PORT:-40200}/tcp"
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      SFU_ANNOUNCED_IP: ${SFU_ANNOUNCED_IP:?set public IP in .env}
+      SFU_MIN_PORT: ${SFU_MIN_PORT:-40000}
+      SFU_MAX_PORT: ${SFU_MAX_PORT:-40200}
+      SFU_NUM_WORKERS: ${SFU_NUM_WORKERS:-4}

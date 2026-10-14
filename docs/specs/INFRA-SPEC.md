@@ -96,13 +96,17 @@ infra/
 > **Port math:** MiroTalk SFU uses 2 ports per participant. 100 users = 200 ports (40000–40200). `SFU_MIN_PORT=40000`, `SFU_MAX_PORT=40200`.
 
 ### DNS (Cloudflare)
+> **Domain decision (2026-10-14):** `drumstr.app` does NOT exist — it is future/fictional.
+> The only real domain is `drumfreeexperience.org`. All records below use `*.drumfreeexperience.org`.
+> `drumstr.app` rows in older docs are aspirational; do not build against them.
+
 | Subdomain | Target | Purpose |
 |---|---|---|
-| drumstr.app | Backend VPS IP | Web app + API (Cloudflare proxied) |
-| api.drumstr.app | Backend VPS IP | REST API |
-| relay.drumstr.app | Backend VPS IP | Nostr relay (WSS) |
-| av.drumstr.app | A/V VPS IP | HiveTalk/MiroTalk SFU |
-| drumfreeexperience.org | drumstr.app | Redirect (301) |
+| drumstr.drumfreeexperience.org | Backend VPS IP | Web app + API (Cloudflare proxied) |
+| api.drumfreeexperience.org | Backend VPS IP | REST API |
+| relay.drumfreeexperience.org | Backend VPS IP | Nostr relay (WSS) |
+| av.drumfreeexperience.org | A/V VPS IP | HiveTalk/MiroTalk SFU (DNS-only/grey — WebRTC direct) |
+| drumfreeexperience.org/drumstr | existing shared hosting | Landing page (current, live) |
 
 ### SSL
 - Cloudflare handles SSL termination for all subdomains.
@@ -230,3 +234,4 @@ services:
 | Date | Author | Description |
 |---|---|---|
 | 2026-03-07 | Moses / Copilot | Initial spec created |
+| 2026-10-14 | HeruQ | Domain correction: drumstr.app is future; all DNS → *.drumfreeexperience.org. infra/scripts/bootstrap-av.sh + infra/compose/docker-compose.av.yml + infra/nginx/av.conf written (MiroTalk SFU v1). |

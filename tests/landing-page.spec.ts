@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 
-const BASE_URL = 'https://drumstr.drumfreeexperience.org';
+const BASE_URL = process.env.BASE_URL ?? 'https://drumstr.drumfreeexperience.org';
 
 test.describe('Drumstr Landing Page', () => {
 
@@ -45,15 +45,15 @@ test.describe('Drumstr Landing Page', () => {
 
   test('daily blocks section shows schedule and join button', async ({ page }) => {
     await page.goto(BASE_URL);
-    await expect(page.locator('#next-block-time')).toContainText('Noon Mountain');
+    await expect(page.locator('#next-block-time')).toContainText('Mountain Time');
     await expect(page.locator('#room-link')).toBeVisible();
-    await expect(page.locator('#room-link')).toHaveAttribute('href', /mirotalk/);
+    await expect(page.locator('#room-link')).toHaveAttribute('href', /jit\.si/);
   });
 
-  test('upcoming blocks list renders seven days', async ({ page }) => {
+  test('upcoming blocks list renders five weekdays', async ({ page }) => {
     await page.goto(BASE_URL);
     const items = page.locator('#upcoming-list li');
-    await expect(items).toHaveCount(7);
+    await expect(items).toHaveCount(5);
   });
 
   test('facilitators section uses professional framing with Coming soon', async ({ page }) => {

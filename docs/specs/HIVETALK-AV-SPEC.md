@@ -230,3 +230,4 @@ Response: { "meeting": "https://av.drumstr.app/join?room=drumstr-event-{eventId}
 | Date | Author | Description |
 |---|---|---|
 | 2026-03-07 | Moses / Copilot | Initial spec created; MiroTalk SFU chosen as v1 implementation |
+| 2026-10-14 | HeruQ | Domain correction: av.drumstr.app → av.drumfreeexperience.org (drumstr.app is future). POC interim: public Jitsi with disableNS/disableAEC/disableAGC on landing page until VPS lands. |
