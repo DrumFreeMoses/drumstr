@@ -18,6 +18,9 @@ services:
       SFU_NUM_WORKERS: ${SFU_NUM_WORKERS:-2}
       JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env (openssl rand -hex 32)}
       API_KEY_SECRET: ${API_KEY_SECRET:?set API_KEY_SECRET in .env}
+    env_file:
+      - .env
     volumes:
-      # drumstr patch: ?drumMode=1 → raw mic constraints (EC/AGC/NS off) + skips RNNoise
+      # drumstr patches: drum mode + facilitator room modes + server relay whitelist
       - ./patches/RoomClient.js:/src/public/js/RoomClient.js:ro
+      - ./patches/Server.js:/src/app/src/Server.js:ro

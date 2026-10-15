@@ -685,6 +685,7 @@ class RoomClient {
 
     async join(data) {
         this.ensureDrumModeButton();
+        this.ensureFacilitatorBar();
         this.joinData = data;
         this.socket
             .request('join', data)
@@ -3175,12 +3176,14 @@ class RoomClient {
         btn.textContent = on ? '🥁 Drum Mode ON' : '🥁 Drum Mode';
     }
 
-    async toggleDrumMode() {
-        const on = !this.isDrumModeActive();
+    async setDrumMode(on) {
+        if (this.isDrumModeActive() === on) {
+            this.updateDrumModeButton(on);
+            return;
+        }
         localStorage.setItem('drumstr_drum_mode', on ? '1' : '0');
         localStorage.setItem('drumstr_drum_mode_set', '1');
         this.updateDrumModeButton(on);
-        this.userLog('info', on ? 'Drum Mode ON — raw audio' : 'Drum Mode OFF — normal audio', 'top-center', 1800);
         if (!this.producerLabel.has(mediaType.audio)) return;
         try {
             this.disableRNNoiseSuppression();
@@ -3201,6 +3204,75 @@ class RoomClient {
             console.warn('Drum Mode switch failed:', err);
             this.userLog('warning', 'Drum Mode switch failed: ' + (err && err.name), 'top-end', 4000);
         }
+    }
+
+    async toggleDrumMode() {
+        const on = !this.isDrumModeActive();
+        await this.setDrumMode(on);
+        this.userLog('info', on ? 'Drum Mode ON — raw audio' : 'Drum Mode OFF — normal audio', 'top-center', 1800);
+    }
+
+    async setLocalMicMuted(muted) {
+        if (!this.producerLabel.has(mediaType.audio)) return;
+        const producer = this.producers.get(this.producerLabel.get(mediaType.audio));
+        if (!producer || producer.paused === muted) return;
+        try {
+            if (muted) {
+                await this.pauseAudioProducer();
+            } else {
+                await this.resumeProducer(mediaType.audio);
+                setColor(startAudioButton, 'green');
+                this.setIsAudio(this.peer_id, true);
+            }
+        } catch (err) {
+            console.warn('setLocalMicMuted failed:', err);
+        }
+    }
+
+    ensureFacilitatorBar() {
+        if (typeof isPresenter === 'undefined' || !isPresenter) return;
+        if (document.getElementById('drumstr-fac-bar')) return;
+        const bar = document.createElement('div');
+        bar.id = 'drumstr-fac-bar';
+        bar.style.cssText =
+            'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9998;display:flex;gap:8px;background:rgba(40,25,10,0.92);padding:8px 12px;border-radius:28px;box-shadow:0 2px 10px rgba(0,0,0,0.35);flex-wrap:wrap;justify-content:center;';
+        const mk = (label, bg, fn) => {
+            const b = document.createElement('button');
+            b.textContent = label;
+            b.style.cssText = `padding:8px 14px;border:none;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;background:${bg};color:#fff;`;
+            b.addEventListener('click', fn);
+            bar.appendChild(b);
+        };
+        mk('🔇 Mute All', '#7f1d1d', () => this.roomMode('drum_room_mute'));
+        mk('🎤 Unmute All', '#14532d', () => this.roomMode('drum_room_unmute'));
+        mk('🥁 Drum', '#c0392b', () => this.roomMode('drum_room_drum'));
+        mk('💬 Talk', '#1e3a5f', () => this.roomMode('drum_room_talk'));
+        document.body.appendChild(bar);
+    }
+
+    async roomMode(type) {
+        // apply locally first, then broadcast (server excludes the sender)
+        switch (type) {
+            case 'drum_room_mute':
+                await this.setLocalMicMuted(true);
+                this.userLog('info', '🔇 Muted everyone', 'top-center', 1800);
+                break;
+            case 'drum_room_unmute':
+                await this.setLocalMicMuted(false);
+                this.userLog('success', '🎤 Unmuted everyone', 'top-center', 1800);
+                break;
+            case 'drum_room_drum':
+                await this.setDrumMode(true);
+                await this.setLocalMicMuted(true);
+                this.userLog('success', '🥁 Drum time — everyone raw + muted, unmute when ready', 'top-center', 2800);
+                break;
+            case 'drum_room_talk':
+                await this.setDrumMode(false);
+                await this.setLocalMicMuted(false);
+                this.userLog('success', '💬 Talk mode — normal audio for everyone', 'top-center', 2200);
+                break;
+        }
+        this.updateRoomModerator({ type, status: true });
     }
 
     getCameraConstraints() {
@@ -13613,6 +13685,24 @@ class RoomClient {
             case 'polls_cant_create':
                 this._moderator.polls_cant_create = data.status;
                 rc.roomMessage('polls_cant_create', data.status);
+                break;
+            case 'drum_room_mute':
+                this.setLocalMicMuted(true);
+                this.userLog('info', '🔇 Muted by facilitator', 'top-center', 2200);
+                break;
+            case 'drum_room_unmute':
+                this.setLocalMicMuted(false);
+                this.userLog('success', '🎤 Unmuted by facilitator', 'top-center', 2200);
+                break;
+            case 'drum_room_drum':
+                this.setDrumMode(true);
+                this.setLocalMicMuted(true);
+                this.userLog('success', '🥁 Drum time — unmute yourself when ready', 'top-center', 2800);
+                break;
+            case 'drum_room_talk':
+                this.setDrumMode(false);
+                this.setLocalMicMuted(false);
+                this.userLog('success', '💬 Talk mode', 'top-center', 2200);
                 break;
             default:
                 break;
