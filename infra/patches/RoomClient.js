@@ -684,6 +684,7 @@ class RoomClient {
     }
 
     async join(data) {
+        this.ensureDrumModeButton();
         this.joinData = data;
         this.socket
             .request('join', data)
@@ -2457,11 +2458,7 @@ class RoomClient {
                 }
             }
 
-            if (
-                audio &&
-                BUTTONS.settings.customNoiseSuppression &&
-                !new URLSearchParams(location.search).get('drumMode')
-            ) {
+            if (audio && BUTTONS.settings.customNoiseSuppression && !this.isDrumModeActive()) {
                 /*
                  * Initialize RNNoise Suppression if enabled and supported
                  * This will only apply to audio tracks
@@ -3111,9 +3108,8 @@ class RoomClient {
     // ####################################################
 
     getAudioConstraints(deviceId) {
-        // drumstr patch: ?drumMode=1 → raw mic (EC/AGC/NS all off) so drum audio survives
-        const drumMode = new URLSearchParams(location.search).get('drumMode');
-        if (drumMode === '1' || drumMode === 'true') {
+        // drumstr patch: drum mode → raw mic (EC/AGC/NS all off) so drum audio survives
+        if (this.isDrumModeActive()) {
             return {
                 audio: {
                     echoCancellation: false,
@@ -3149,6 +3145,62 @@ class RoomClient {
         return {
             audio: audioConstraints,
         };
+    }
+
+    // drumstr patch: real-time Drum Mode toggle (talk ↔ drum without leaving the room)
+    isDrumModeActive() {
+        if (localStorage.getItem('drumstr_drum_mode_set') === '1') {
+            return localStorage.getItem('drumstr_drum_mode') === '1';
+        }
+        const url = new URLSearchParams(location.search).get('drumMode');
+        return url === '1' || url === 'true';
+    }
+
+    ensureDrumModeButton() {
+        if (document.getElementById('drumstr-drum-btn')) return;
+        const btn = document.createElement('button');
+        btn.id = 'drumstr-drum-btn';
+        btn.title = 'Drum Mode: raw mic — no echo cancel, no gain, no noise gate';
+        btn.style.cssText =
+            'position:fixed;left:12px;bottom:80px;z-index:9999;padding:10px 16px;border-radius:24px;border:none;font-size:14px;font-weight:600;cursor:pointer;background:#6b4423;color:#fff;opacity:0.92;box-shadow:0 2px 8px rgba(0,0,0,0.3);';
+        btn.addEventListener('click', () => this.toggleDrumMode());
+        document.body.appendChild(btn);
+        this.updateDrumModeButton(this.isDrumModeActive());
+    }
+
+    updateDrumModeButton(on) {
+        const btn = document.getElementById('drumstr-drum-btn');
+        if (!btn) return;
+        btn.style.background = on ? '#c0392b' : '#6b4423';
+        btn.textContent = on ? '🥁 Drum Mode ON' : '🥁 Drum Mode';
+    }
+
+    async toggleDrumMode() {
+        const on = !this.isDrumModeActive();
+        localStorage.setItem('drumstr_drum_mode', on ? '1' : '0');
+        localStorage.setItem('drumstr_drum_mode_set', '1');
+        this.updateDrumModeButton(on);
+        this.userLog('info', on ? 'Drum Mode ON — raw audio' : 'Drum Mode OFF — normal audio', 'top-center', 1800);
+        if (!this.producerLabel.has(mediaType.audio)) return;
+        try {
+            this.disableRNNoiseSuppression();
+            const stream = await navigator.mediaDevices.getUserMedia(this.getAudioConstraints(undefined));
+            const track = stream.getAudioTracks()[0];
+            const producerId = this.producerLabel.get(mediaType.audio);
+            const producer = this.producers.get(producerId);
+            if (!producer || !track) return;
+            await producer.replaceTrack({ track });
+            track.enabled = !producer.paused;
+            const old = this.localAudioStream;
+            this.localAudioStream = stream;
+            if (old && old !== stream) old.getTracks().forEach((t) => t.stop());
+            const audioElement = this.getId(producerId);
+            if (audioElement) audioElement.srcObject = stream;
+            if (typeof getMicrophoneVolumeIndicator === 'function') getMicrophoneVolumeIndicator(stream);
+        } catch (err) {
+            console.warn('Drum Mode switch failed:', err);
+            this.userLog('warning', 'Drum Mode switch failed: ' + (err && err.name), 'top-end', 4000);
+        }
     }
 
     getCameraConstraints() {
