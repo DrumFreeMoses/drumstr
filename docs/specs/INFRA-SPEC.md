@@ -235,3 +235,4 @@ services:
 |---|---|---|
 | 2026-03-07 | Moses / Copilot | Initial spec created |
 | 2026-10-14 | HeruQ | Domain correction: drumstr.app is future; all DNS → *.drumfreeexperience.org. infra/scripts/bootstrap-av.sh + infra/compose/docker-compose.av.yml + infra/nginx/av.conf written (MiroTalk SFU v1). |
+| 2026-10-15 | HeruQ | A/V VPS LIVE: av-drumstr (Hetzner, 204.168.251.185, 2 vCPU/4GB, Ubuntu 24.04). MiroTalk SFU in Docker (mirotalk/sfu, JWT_SECRET + API_KEY_SECRET required), nginx + Let's Encrypt on av.drumfreeexperience.org (DNS-only), certbot auto-renew with nginx stop/start hooks. Room API: POST /api/v1/meeting. Join scheme /join/{room}. SSH: ~/.ssh/id_dfe_web → root@204.168.251.185. |
