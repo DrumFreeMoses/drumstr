@@ -3173,7 +3173,8 @@ class RoomClient {
         const btn = document.getElementById('drumstr-drum-btn');
         if (!btn) return;
         btn.style.background = on ? '#c0392b' : '#6b4423';
-        btn.textContent = on ? '🥁 Drum Mode ON' : '🥁 Drum Mode';
+        const icon = '<img src="/images/logo.svg" alt="" style="width:16px;height:16px;vertical-align:-3px;margin-right:6px;">';
+        btn.innerHTML = icon + (on ? 'Drum Mode ON' : 'Drum Mode');
     }
 
     async setDrumMode(on) {
@@ -3238,14 +3239,15 @@ class RoomClient {
             'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9998;display:flex;gap:8px;background:rgba(40,25,10,0.92);padding:8px 12px;border-radius:28px;box-shadow:0 2px 10px rgba(0,0,0,0.35);flex-wrap:wrap;justify-content:center;';
         const mk = (label, bg, fn) => {
             const b = document.createElement('button');
-            b.textContent = label;
+            b.innerHTML = label;
             b.style.cssText = `padding:8px 14px;border:none;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;background:${bg};color:#fff;`;
             b.addEventListener('click', fn);
             bar.appendChild(b);
         };
+        const drumIcon = '<img src="/images/logo.svg" alt="" style="width:15px;height:15px;vertical-align:-3px;margin-right:5px;">';
         mk('🔇 Mute All', '#7f1d1d', () => this.roomMode('drum_room_mute'));
         mk('🎤 Unmute All', '#14532d', () => this.roomMode('drum_room_unmute'));
-        mk('🥁 Drum', '#c0392b', () => this.roomMode('drum_room_drum'));
+        mk(drumIcon + 'Drum', '#c0392b', () => this.roomMode('drum_room_drum'));
         mk('💬 Talk', '#1e3a5f', () => this.roomMode('drum_room_talk'));
         document.body.appendChild(bar);
     }

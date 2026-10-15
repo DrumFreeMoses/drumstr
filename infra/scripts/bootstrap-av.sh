@@ -38,6 +38,12 @@ fi
 if [ ! -f patches/RoomClient.js ]; then
   curl -fsSL https://raw.githubusercontent.com/DrumFreeMoses/drumstr/main/infra/patches/RoomClient.js -o patches/RoomClient.js
 fi
+if [ ! -f patches/Server.js ]; then
+  curl -fsSL https://raw.githubusercontent.com/DrumFreeMoses/drumstr/main/infra/patches/Server.js -o patches/Server.js
+fi
+if [ ! -f patches/logo.svg ]; then
+  curl -fsSL https://raw.githubusercontent.com/DrumFreeMoses/drumstr/main/infra/patches/logo.svg -o patches/logo.svg
+fi
 
 # SFU_ANNOUNCED_IP must be this box's public IPv4 (WebRTC ICE candidate).
 # Force -4: ifconfig.me otherwise returns the box's IPv6 and ICE breaks

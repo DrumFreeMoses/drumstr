@@ -24,3 +24,4 @@ services:
       # drumstr patches: drum mode + facilitator room modes + server relay whitelist
       - ./patches/RoomClient.js:/src/public/js/RoomClient.js:ro
       - ./patches/Server.js:/src/app/src/Server.js:ro
+      - ./patches/logo.svg:/src/public/images/logo.svg:ro
