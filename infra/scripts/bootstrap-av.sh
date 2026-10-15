@@ -1,5 +1,6 @@
 #!/bin/bash
-# bootstrap-av.sh — One-time A/V VPS setup (Hetzner CX31, Ubuntu 22.04)
+# bootstrap-av.sh — One-time A/V VPS setup (Hetzner shared vCPU, Ubuntu 24.04)
+# Deployed 2026-10-14 on av-drumstr (204.168.251.185, 2 vCPU / 4GB).
 # Per docs/specs/INFRA-SPEC.md + HIVETALK-AV-SPEC.md (v1 = MiroTalk SFU).
 # Domain decision (2026-10-14): drumstr.app is FUTURE. Real domain: drumfreeexperience.org.
 #   A/V host: av.drumfreeexperience.org (Cloudflare grey-cloud / DNS-only — WebRTC needs direct IP)
@@ -41,7 +42,7 @@ cat > .env <<EOF
 SFU_ANNOUNCED_IP=${PUBLIC_IP}
 SFU_MIN_PORT=${AV_PORT_MIN}
 SFU_MAX_PORT=${AV_PORT_MAX}
-SFU_NUM_WORKERS=4
+SFU_NUM_WORKERS=2
 ENVIRONMENT=production
 EOF
 

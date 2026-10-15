@@ -3,7 +3,7 @@
 # SFU_ANNOUNCED_IP comes from .env (public IP of this VPS — required for ICE).
 services:
   mirotalksfu:
-    image: miroslavpejic85/mirotalksfu:latest
+    image: mirotalk/sfu:latest
     container_name: drumstr-mirotalksfu
     restart: unless-stopped
     ports:
