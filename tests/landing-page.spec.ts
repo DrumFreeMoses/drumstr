@@ -56,6 +56,15 @@ test.describe('Drumstr — Just Drum (index)', () => {
     expect(content).toContain('drumfreeexperience.org');
   });
 
+  test('CTA embeds FluentCRM form', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await expect(page.locator('text=Get the next block in your inbox')).toBeVisible();
+    await expect(page.locator('iframe[title="DFE email signup"]')).toHaveAttribute(
+      'src',
+      /fluentform_embed=1&form_id=1/
+    );
+  });
+
   test('mobile: nav collapses, title scales', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto(BASE_URL);
