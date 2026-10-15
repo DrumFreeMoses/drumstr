@@ -3,278 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Drumstr — Exhilarate. Transcend. Belong. A decentralized platform for virtual group drumming on Nostr and Bitcoin Lightning.">
-  <title>Drumstr — Exhilarate. Transcend. Belong.</title>
+  <meta name="description" content="Drumstr — a free 10-minute group drum block, every weekday at 5 PM Mountain. Just drum. We'll explain later.">
+  <title>Drumstr — Just Drum.</title>
   <link rel="icon" type="image/svg+xml" href="images/logo.svg">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .just-main { min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px; }
+    .just-title { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: clamp(3rem, 10vw, 6rem); color: var(--brown); line-height: 1.05; margin-bottom: 18px; }
+    .just-sub { font-size: 1.25rem; color: var(--brown); opacity: 0.85; margin-bottom: 8px; }
+    .just-note { font-size: 1rem; color: var(--brown); opacity: 0.6; margin-bottom: 36px; }
+    .just-cta { margin-bottom: 22px; }
+    .just-links { font-size: 0.95rem; opacity: 0.75; }
+    .just-links a { color: var(--gold); margin: 0 12px; }
+    .just-how { padding: 50px 20px; background: var(--white); text-align: center; }
+    .just-how p { max-width: 520px; margin: 0 auto; color: var(--brown); line-height: 1.7; }
+  </style>
 </head>
 <body>
-  <!-- NAV -->
   <nav class="nav">
     <div class="container nav-inner">
-      <a href="#" class="nav-brand">
+      <a href="/" class="nav-brand">
         <img src="images/logo.svg" alt="Drumstr" class="nav-logo">
         <div class="nav-text">
           <span class="nav-name">Drumstr</span>
-          <span class="nav-tag">Powered by Nostr</span>
         </div>
       </a>
       <div class="nav-links">
-        <a href="#how" class="nav-link">How It Works</a>
-        <a href="#blocks" class="nav-link">Daily Blocks</a>
-        <a href="#facilitators" class="nav-link">Facilitators</a>
-        <a href="https://github.com/DrumFreeMoses/drumstr" target="_blank" class="nav-link">Source Code</a>
+        <a href="vision.html" class="nav-link">Vision</a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg">
-      <img src="images/hero.png" alt="" class="hero-bg-img" onerror="this.style.display='none'">
-      <div class="hero-bg-overlay"></div>
+  <main class="just-main">
+    <h1 class="just-title">Just Drum.</h1>
+    <p class="just-sub">Free. 10 minutes. Every weekday, 5 PM Mountain.</p>
+    <p class="just-note">No account. No app. Nothing to figure out — we'll explain later.</p>
+    <div class="just-cta">
+      <a id="room-link" href="https://av.drumfreeexperience.org/join/drumstr-block-2026-10-16?drumMode=1" class="btn btn-primary btn-lg" hidden>Join Today's Block</a>
     </div>
-    <div class="container hero-content">
-      <div class="hero-headline">
-        <span class="hero-word">EXHILARATE</span>
-        <span class="hero-word">TRANSCEND</span>
-        <span class="hero-word hero-word-accent">BELONG</span>
-      </div>
-      <p class="hero-sub">
-        A global community drumming on Bitcoin and Nostr.<br>
-        Virtual group drumming circles. Trained facilitators. Real-time rhythm.
-      </p>
-      <div class="hero-cta">
-        <a href="#blocks" class="btn btn-primary btn-lg">Join the Daily Block</a>
-        <a href="#drum-up" class="btn btn-outline btn-lg">Drum up a Circle</a>
-      </div>
-      <div class="hero-badge">
-        <span>⚡</span> Decentralized on Nostr &bull; Bitcoin Lightning
-      </div>
-    </div>
-  </section>
+    <p class="just-links">
+      <a href="vision.html">What is this?</a>
+      <a href="https://drumfreeexperience.org" target="_blank" rel="noopener">Details at Drum Free Experience</a>
+    </p>
+  </main>
 
-  <!-- GALLERY STRIP -->
-  <section class="gallery">
+  <section class="just-how">
     <div class="container">
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="https://drumfreeexperience.org/landing/images/gallery-images/gallery-image-2.jpg" alt="Drum circle gathering" loading="lazy">
-        </div>
-        <div class="gallery-item">
-          <img src="https://drumfreeexperience.org/landing/images/gallery-images/gallery-image-3.jpg" alt="Community drumming" loading="lazy">
-        </div>
-        <div class="gallery-item">
-          <img src="https://drumfreeexperience.org/landing/images/gallery-images/gallery-image-4.jpg" alt="Hands on drums" loading="lazy">
-        </div>
-      </div>
+      <p>A link. A mic. Some drums — or pots, or hands, or anything that makes noise.<br>
+      We drum together for ten minutes. That's the whole thing.</p>
     </div>
   </section>
 
-  <!-- HOW IT WORKS: DEMAND-DRIVEN MODEL -->
-  <section class="how" id="how">
-    <div class="container">
-      <h2 class="section-title">How It Works</h2>
-      <p class="section-sub">The world's first demand-driven drumming network. You drum. The circle forms.</p>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <h3>Drum Call</h3>
-          <p>Tap your phone in the Drumstr app to send a rhythmic call across the Nostr network. Each drum call is a real-time signal&mdash;amplified by Lightning Zaps.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <h3>Hear &amp; Respond</h3>
-          <p>Other members hear your call in real time and respond with their own rhythms. The volume grows. The energy builds. The circle forms.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <h3>Threshold Met</h3>
-          <p>When both quotas are reached&mdash;house minimum and personal minimum&mdash;the system dispatches a Facilitator Request automatically.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <h3>Session Begins</h3>
-          <p>A trained facilitator claims the call. The session starts&mdash;or a delay time is published. You drum. You belong.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DRUM UP A CIRCLE -->
-  <section class="drum-up" id="drum-up">
-    <div class="container">
-      <div class="drum-up-card">
-        <h2>Drum up a Circle</h2>
-        <p class="drum-up-lead">
-          When enough drummers hear the call and join, a trained facilitator is dispatched. No scheduling. No searching. Just rhythm.
-        </p>
-        <div class="drum-up-features">
-          <div class="drum-up-feature">
-            <span class="drum-up-icon">🔊</span>
-            <div>
-              <h4>Real-Time Tapping</h4>
-              <p>Drum on your phone. Your rhythm is heard on the network instantly.</p>
-            </div>
-          </div>
-          <div class="drum-up-feature">
-            <span class="drum-up-icon">⚡</span>
-            <div>
-              <h4>Lightning-Powered</h4>
-              <p>Zaps carry your drum call further. Invest in the circle you want to join.</p>
-            </div>
-          </div>
-          <div class="drum-up-feature">
-            <span class="drum-up-icon">🤝</span>
-            <div>
-              <h4>Auto-Dispatch</h4>
-              <p>Thresholds met. Facilitator notified. Session begins. It's that simple.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY NOSTR & BITCOIN -->
-  <section class="why">
-    <div class="container">
-      <h2 class="section-title">Why Nostr &amp; Bitcoin?</h2>
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-icon">🌐</div>
-          <h3>Global &amp; Decentralized</h3>
-          <p>Connect with drummers worldwide on a censorship-resistant network. Your identity. Your keys. Your rhythm.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">⚡</div>
-          <h3>Lightning Fast</h3>
-          <p>Instant, low-fee payments on the Bitcoin Lightning Network. Zaps flow in real time during drumming.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🔒</div>
-          <h3>Self-Custodial</h3>
-          <p>No passwords. No email. No surveillance. Your Nostr keypair is your identity across the entire network.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DAILY BLOCKS -->
-  <section class="blocks" id="blocks">
-    <div class="container">
-      <h2 class="section-title">Daily Drum Blocks</h2>
-      <p class="section-sub">10 minutes. Every day. After work. The simplest way to start drumming with us.</p>
-
-      <div class="blocks-card">
-        <div class="blocks-info">
-          <div class="blocks-detail">
-            <span class="blocks-label">When</span>
-            <span class="blocks-value" id="next-block-time">5:00 PM Mountain Time (4 PM PST / 7 PM EST), Mon-Fri</span>
-          </div>
-          <div class="blocks-detail">
-            <span class="blocks-label">Duration</span>
-            <span class="blocks-value">10 minutes</span>
-          </div>
-          <div class="blocks-detail">
-            <span class="blocks-label">Cost</span>
-            <span class="blocks-value">Free to join</span>
-          </div>
-        </div>
-        <a id="room-link" href="https://honey.hivetalk.org/meet/drumstr-block-2026-10-14" class="btn btn-primary btn-lg">Join the Room</a>
-        <p class="blocks-note">No signup required. Just click and drum. &nbsp;Coming soon: real-time demand-driven circles via the Drumstr app.</p>
-        <p class="blocks-note">⚡ Enjoyed it? Optional tip, sliding scale, any amount: <strong>serialrush944@wos.com</strong> (Lightning Address — paste into any Lightning wallet)</p>
-      </div>
-
-      <div class="upcoming-blocks">
-        <h4>This Week's Blocks</h4>
-        <ul id="upcoming-list">
-          <li>Loading...</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- FACILITATORS -->
-  <section class="facilitators" id="facilitators">
-    <div class="container">
-      <h2 class="section-title">Trained Facilitators</h2>
-      <p class="section-sub">
-        Drumstr facilitators are trained community leaders who guide rhythmic experiences
-        through the 5-Element Theory framework. They are apprenticed, certified, and compensated.
-      </p>
-      <div class="facilitator-cta">
-        <p>Facilitator applications open soon.</p>
-        <span class="coming-soon">Coming soon...</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRAINING TEASER -->
-  <section class="training">
-    <div class="container">
-      <p class="training-line">5-Element Theory-Driven Kinesthetic Rhythm Training &mdash; <strong>Coming soon...</strong></p>
-    </div>
-  </section>
-
-  <!-- INTEREST -->
-  <section class="interest" id="interest">
-    <div class="container">
-      <div class="interest-card">
-        <h2>Ready to Drum Free?</h2>
-        <p>Register your interest. We'll notify you when the Drumstr app launches and Drum up a Circle becomes live.</p>
-        <div id="fluentform-container" class="fluentform-container">
-          <!-- FluentForm embed goes here -->
-          <!-- Replace form_id with actual WordPress FluentForm ID -->
-          <iframe
-            src="https://drumfreeexperience.org/?fluentform_embed=1&form_id=1"
-            title="Register Interest"
-            width="100%"
-            height="380"
-            frameborder="0"
-            scrolling="no"
-          ></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="footer-logo">
-            <img src="images/logo.svg" alt="Drumstr">
-            <span>Drumstr</span>
-          </div>
-          <p>Virtual group drumming on Nostr and Bitcoin Lightning.<br>
-          Part of the <a href="https://drumfreeexperience.org" target="_blank">Drum Free Experience™</a>.</p>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="images/logo.svg" alt="">
+          <span>Drumstr</span>
         </div>
-        <div class="footer-links">
-          <h4>Explore</h4>
-          <ul>
-            <li><a href="#how">How It Works</a></li>
-            <li><a href="#blocks">Daily Blocks</a></li>
-            <li><a href="#facilitators">Facilitators</a></li>
-            <li><a href="#interest">Register Interest</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Network</h4>
-          <ul>
-            <li><a href="https://nostr.com" target="_blank">Nostr</a></li>
-            <li><a href="https://lightning.network" target="_blank">Lightning Network</a></li>
-            <li><a href="https://nostrhub.io/drumfreemoses@drumfreeexperience.org/drumstr" target="_blank">GitHub (NostrHub)</a></li>
-            <li><a href="https://github.com/DrumFreeMoses/drumstr" target="_blank">Source Code (GitHub)</a></li>
-            <li><a href="https://shakespeare.diy" target="_blank">Built with Shakespeare</a></li>
-          </ul>
-        </div>
+        <p>Just drum. <a href="vision.html">The bigger vision</a> is growing.</p>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Drumstr &bull; Drum Free Experience™ &bull; Exhilarate. Transcend. Belong.</p>
+      <div class="footer-links">
+        <h4>More</h4>
+        <ul>
+          <li><a href="https://drumfreeexperience.org" target="_blank" rel="noopener">Drum Free Experience</a></li>
+          <li><a href="vision.html">Vision</a></li>
+          <li><a href="https://github.com/DrumFreeMoses/drumstr" target="_blank" rel="noopener">Source Code</a></li>
+        </ul>
       </div>
     </div>
   </footer>
