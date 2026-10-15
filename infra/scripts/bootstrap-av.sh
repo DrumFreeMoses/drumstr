@@ -44,6 +44,8 @@ SFU_MIN_PORT=${AV_PORT_MIN}
 SFU_MAX_PORT=${AV_PORT_MAX}
 SFU_NUM_WORKERS=2
 ENVIRONMENT=production
+JWT_SECRET=$(openssl rand -hex 32)
+API_KEY_SECRET=$(openssl rand -hex 32)
 EOF
 
 docker compose pull

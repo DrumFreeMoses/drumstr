@@ -15,4 +15,6 @@ services:
       SFU_ANNOUNCED_IP: ${SFU_ANNOUNCED_IP:?set public IP in .env}
       SFU_MIN_PORT: ${SFU_MIN_PORT:-40000}
       SFU_MAX_PORT: ${SFU_MAX_PORT:-40200}
-      SFU_NUM_WORKERS: ${SFU_NUM_WORKERS:-4}
+      SFU_NUM_WORKERS: ${SFU_NUM_WORKERS:-2}
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env (openssl rand -hex 32)}
+      API_KEY_SECRET: ${API_KEY_SECRET:?set API_KEY_SECRET in .env}
