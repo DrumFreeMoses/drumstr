@@ -36,8 +36,10 @@ if [ ! -f docker-compose.yml ]; then
   curl -fsSL https://raw.githubusercontent.com/DrumFreeMoses/drumstr/main/infra/compose/docker-compose.av.yml -o docker-compose.yml
 fi
 
-# SFU_ANNOUNCED_IP must be this box's public IP (WebRTC ICE candidate)
-PUBLIC_IP=$(curl -fsSL https://ifconfig.me || curl -fsSL https://api.ipify.org)
+# SFU_ANNOUNCED_IP must be this box's public IPv4 (WebRTC ICE candidate).
+# Force -4: ifconfig.me otherwise returns the box's IPv6 and ICE breaks
+# on IPv4-only/broken-IPv6 client networks (iPad spinner, 2026-10-15).
+PUBLIC_IP=$(curl -4 -fsSL https://api.ipify.org || curl -4 -fsSL https://ifconfig.me)
 cat > .env <<EOF
 SFU_ANNOUNCED_IP=${PUBLIC_IP}
 SFU_MIN_PORT=${AV_PORT_MIN}
