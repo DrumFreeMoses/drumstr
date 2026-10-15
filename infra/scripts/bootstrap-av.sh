@@ -30,10 +30,13 @@ ufw allow "${AV_PORT_MIN}:${AV_PORT_MAX}/udp"
 ufw --force enable
 
 echo "==> Deploy MiroTalk SFU (Docker)"
-mkdir -p /opt/drumstr-av
+mkdir -p /opt/drumstr-av/patches
 cd /opt/drumstr-av
 if [ ! -f docker-compose.yml ]; then
   curl -fsSL https://raw.githubusercontent.com/DrumFreeMoses/drumstr/main/infra/compose/docker-compose.av.yml -o docker-compose.yml
+fi
+if [ ! -f patches/RoomClient.js ]; then
+  curl -fsSL https://raw.githubusercontent.com/DrumFreeMoses/drumstr/main/infra/patches/RoomClient.js -o patches/RoomClient.js
 fi
 
 # SFU_ANNOUNCED_IP must be this box's public IPv4 (WebRTC ICE candidate).
